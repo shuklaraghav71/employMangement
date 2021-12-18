@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from '../api.service';
 import {Employee } from '../employee'
 @Component({
   selector: 'app-employee-list',
@@ -6,8 +7,12 @@ import {Employee } from '../employee'
   styleUrls: ['./employee-list.component.css']
 })
 export class EmployeeListComponent implements OnInit {
-  employee!: Employee[];
-  constructor() { }
+  employees: Employee[] | undefined;
+  constructor(private api:ApiService) { }
   ngOnInit(): void {
+    this.api.getList().subscribe((response:any) =>{
+      console.log(response)
+      this.employees = response}
+      )
   }
 }
